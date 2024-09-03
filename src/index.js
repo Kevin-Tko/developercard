@@ -2,6 +2,39 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
+const skills = [
+    {
+        skill: "HTML+CSS",
+        level: "advanced",
+        color: "#22b8cf",
+    },
+    {
+        skill: "JavaScript",
+        level: "advanced",
+        color: "#fcc419",
+    },
+    {
+        skill: "Git and GitHub",
+        level: "intermediate",
+        color: "#f06595",
+    },
+    {
+        skill: "React",
+        level: "advanced",
+        color: "#ff6b6b",
+    },
+    {
+        skill: "Web Design",
+        level: "advanced",
+        color: "#94d82d",
+    },
+    {
+        skill: "Svelte",
+        level: "beginner",
+        color: "#cc5de8",
+    },
+];
+
 function App() {
     return (
         <div className="container">
@@ -34,33 +67,38 @@ function CardImage() {
 }
 
 function CardBody() {
+    const devSkills = skills;
     return (
         <div className="card-body">
             <h1>Kevin Njogu</h1>
             <p>
-                Full stack wed developer and banker at XYZ bank. When not coding
+                Full stack web developer and banker at XYZ bank. When not coding
                 or serving my clients, I like working out and going out to
                 experience Nairobi's hidden Gems.
             </p>
-            <div className="card-footer">
-                <CardFooter skill="HTML+CSS" emoji="💪" color="#22b8cf" />
-                <CardFooter skill="Web Design" emoji="💪" color="#fcc419" />
-                <CardFooter skill="Git/Github" emoji="👍" color="#94d82d" />
-                <CardFooter skill="React" emoji="💪" color="#f06595" />
-                <CardFooter skill="Javascript" emoji="💪" color="#ff6b6b" />
-                <CardFooter skill="Svelte" emoji="🤦‍♂️" color="#cc5de8" />
-            </div>
+            <ul className="card-footer">
+                {devSkills.map((skill) => (
+                    <CardFooter
+                        skill={skill.skill}
+                        color={skill.color}
+                        level={skill.level}
+                    />
+                ))}
+            </ul>
         </div>
     );
 }
 
-function CardFooter(props) {
+function CardFooter({ skill, color, level }) {
     return (
-        <div className="skills">
-            <p style={{ backgroundColor: props.color }}>
-                {props.skill} {props.emoji}
-            </p>
-        </div>
+        <li style={{ backgroundColor: color }} className="skill">
+            {skill}
+            {level === "advanced"
+                ? "💪"
+                : level === "intermediate"
+                ? "👍"
+                : "🤦‍♂️"}
+        </li>
     );
 }
 
